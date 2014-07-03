@@ -75,7 +75,7 @@ class TP_Global_Content_Blocks {
 		if( isset( $_REQUEST['post_view'] ) && $_REQUEST['post_view'] == 'list' )
 		    return;
 
-		if( 'gc' != $_POST['post_type'] )
+		if( ! isset( $_POST['post_type'] ) || 'gc' != $_POST['post_type'] )
 			return;
 
 		/**
