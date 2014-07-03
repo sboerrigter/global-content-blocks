@@ -3,20 +3,20 @@ Global content blocks
 
 Adds global content blocks to WordPress. Call them by using a template tag or a shortcode.
 
-## Template tag
+### Template tag
 
 	<?php the_gc( 'testimonials' ); ?>
 
-## Shortcode
+### Shortcode
 
 	[gc name="testimonials"]
 
-## Create post
+### Create post
 You can also just create a post and a template tag and/or shortcode will be generated.
 
-# Hooks
+## Hooks
 
-## tp_gc_args( $args )
+### tp_gc_args( $args )
 Allows you to setup the global content post type differently. Usage:
 
 	<?php add_filter( 'tp_gc_args', 'my_adjustment_function' ); ?>
