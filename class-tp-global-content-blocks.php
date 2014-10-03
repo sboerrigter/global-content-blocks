@@ -6,6 +6,7 @@
 
 class TP_Global_Content_Blocks {
 	function __construct() {
+		add_action( 'plugins_loaded', array( $this, 'localization' ) );
 		add_action( 'init' , array( $this, 'register' ) );
 		
 		add_shortcode( 'gc' , array( $this, 'display' ) );
@@ -17,16 +18,23 @@ class TP_Global_Content_Blocks {
 		add_filter( 'manage_edit-gc_columns' , array( $this, 'add_column' ) );
 		add_action( 'manage_posts_custom_column', array( $this, 'display_column' ) );
 	}
+
+	/**
+	 * Load localization
+	 */
+	function localization() {
+		load_muplugin_textdomain( 'gc', dirname( plugin_basename( __FILE__ ) ) . '/assets/lang/' );
+	}
 	
 	/**
 	 * Register post type
 	 */
 	function register() {
 		$labels = array(
-			'name'          => __( 'General' , 'tp' ),
-			'singular_name' => __( 'Content' , 'tp' ),
-			'add_new'       => __( 'Add content' , 'tp' ),
-			'add_new_item'  => __( 'Add new content' , 'tp' ),
+			'name'          => __( 'General' , 'gc' ),
+			'singular_name' => __( 'Content' , 'gc' ),
+			'add_new'       => __( 'Add content' , 'gc' ),
+			'add_new_item'  => __( 'Add content' , 'gc' ),
 		);
 		
 		$args = array(
@@ -44,8 +52,8 @@ class TP_Global_Content_Blocks {
 	 * @column Add new column
 	 */
 	function add_column( $columns ) {
-		$columns['template_tag'] = __( 'Template tag' , 'tp' );
-		$columns['shortcode'] = __( 'Shortcode' , 'tp' );
+		$columns['template_tag'] = __( 'Template tag' , 'gc' );
+		$columns['shortcode'] = __( 'Shortcode' , 'gc' );
 		return $columns;
 	}
 	
