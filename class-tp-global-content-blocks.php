@@ -2,6 +2,13 @@
 /**
  * Plugin Name: Global content blocks
  * Description: Adds global content blocks to WordPress. Call them by using a template tag or a shortcode.
+ *
+ * Plugin URI: https://github.com/trendwerk/global-content-blocks
+ * 
+ * Author: Trendwerk
+ * Author URI: https://github.com/trendwerk
+ * 
+ * Version: 1.0.0
  */
 
 class TP_Global_Content_Blocks {

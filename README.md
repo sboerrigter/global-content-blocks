@@ -3,6 +3,19 @@ Global content blocks
 
 Adds global content blocks to WordPress. Call them by using a template tag or a shortcode.
 
+## Installation
+If you're using Composer to manage WordPress, add this plugin to your project's dependencies. Run:
+```sh
+composer require trendwerk/global-content-blocks 1.0.0
+```
+
+Or manually add it to your `composer.json`:
+```json
+"require": {
+	"trendwerk/global-content-blocks": "1.0.0"
+},
+```
+
 ### Template tag
 
 	<?php the_gc( 'testimonials' ); ?>
