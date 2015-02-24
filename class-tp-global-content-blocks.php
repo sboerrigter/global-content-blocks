@@ -87,7 +87,7 @@ class TP_Global_Content_Blocks {
 		if( isset( $_REQUEST['doing_wp_cron'] ) )
 			return;
 			
-		if( isset( $_REQUEST['post_view'] ) && $_REQUEST['post_view'] == 'list' )
+		if( isset( $_REQUEST['post_view'] ) )
 		    return;
 
 		if( ! isset( $_POST['post_type'] ) || 'gc' != $_POST['post_type'] )
