@@ -8,7 +8,7 @@
  * Author: Trendwerk
  * Author URI: https://github.com/trendwerk
  * 
- * Version: 1.0.0
+ * Version: 1.0.1
  */
 
 class TP_Global_Content_Blocks {
@@ -99,7 +99,7 @@ class TP_Global_Content_Blocks {
 		$post = get_post( $post_id );
 
 		if( ! get_post_meta( $post_id, '_gc_id', true ) && 'publish' == $post->post_status )
-			update_post_meta( $post_id, '_gc_id', $this->get_id( $post->post_title ) );
+			update_post_meta( $post_id, '_gc_id', self::get_id( $post->post_title ) );
 	}
 	
 	/**
@@ -111,11 +111,11 @@ class TP_Global_Content_Blocks {
 		
 		global $post;
 		
-		if( $this->exists( $args['name'] ) ) {
-			$block = $this->get( $args['name'] );
+		if( self::exists( $args['name'] ) ) {
+			$block = self::get( $args['name'] );
 			return apply_filters( 'the_content' , $block->post_content );
 		} else {
-			$this->create( $args['name'] );
+			self::create( $args['name'] );
 		}
 	}
 	
@@ -123,24 +123,28 @@ class TP_Global_Content_Blocks {
 	 * Check if a block exists
 	 *
 	 * @param string $name
+	 *
+	 * @abstract
 	 */
-	function exists( $name ) {
-		if( $this->get( $name ) ) return true;
+	public static function exists( $name ) {
+		if( self::get( $name ) ) return true;
 	}
 	
 	/**
 	 * Get a block
 	 *
 	 * @param string $name
+	 *
+	 * @abstract
 	 */
-	function get( $name ) {
+	public static function get( $name ) {
 		$posts = get_posts( array(
 			'post_type'      => 'gc',
 			'posts_per_page' => -1,
 			'meta_query'     => array(
 				array(
 					'key'   => '_gc_id',
-					'value' => $this->get_id( $name )
+					'value' => self::get_id( $name )
 				)
 			),
 		) );
@@ -154,23 +158,27 @@ class TP_Global_Content_Blocks {
 	 * Create new block
 	 *
 	 * @param string $name
+	 *
+	 * @abstract
 	 */
-	function create( $name ) {
+	public static function create( $name ) {
 		$post_id = wp_insert_post( array(
 			'post_type'   => 'gc',
 			'post_status' => 'publish',
 			'post_title'  => $name,
 		) );
 		
-		update_post_meta( $post_id, '_gc_id', $this->get_id( $name ) );
+		update_post_meta( $post_id, '_gc_id', self::get_id( $name ) );
 	}
 	
 	/**
 	 * Get _gc_id based on a name
 	 *
 	 * @param string $name
+	 *
+	 * @abstract
 	 */
-	function get_id( $name ) {
+	public static function get_id( $name ) {
 		return sanitize_title_with_dashes( $name );
 	}
 } new TP_Global_Content_Blocks;
